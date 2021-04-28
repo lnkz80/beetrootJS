@@ -25,7 +25,7 @@
 
     <header class="top-header">
         <div class="container">
-            <h1>Welcome to our site</h1>
+            <h1>Welcome to our site</h1>            
         </div>
     </header>
 
@@ -34,7 +34,7 @@
             <div class="filter-box">
                 <div class="select-box">
                     <label class="filter-label">Категория</label>
-                    <select class="select-control">
+                    <select class="select-control" id="catSel">
                         <option value="0">Все</option>
                         <option value="1">Завтраки</option>
                         <option  value="2">Первые блюда</option>
@@ -43,7 +43,7 @@
                 </div><!-- /.select-box -->
                 <div class="price-select-box">
                     <label class="filter-label">Цена</label>
-                    <select class="select-control">
+                    <select class="select-control" id="priceSel">
                         <option value="0">Все</option>
                         <option value="30">До 30 грн</option>
                         <option value="50">До 50 грн</option>
@@ -55,7 +55,7 @@
 
 
 
-            <div class="products-box grid-box">
+            <div class="products-box grid-box" id="products">
 
                 <div class="product-box__item">
                     <h3 class="product-box__title">Овсяная каша с фруктами</h3>
