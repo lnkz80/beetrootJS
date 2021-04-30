@@ -42,7 +42,6 @@ document.addEventListener("click", addItemToCart);
 //addListener on filter change
 document.addEventListener("change", changeFilterBtn);
 
-
 /* 
 =============> Фильтрация товара по выбранным категориям и цене
 */
@@ -126,27 +125,67 @@ function addItemToCart(e) {
 const wrapper = document.getElementById("app-container");
 
 const userInfo = document.createElement("div");
-userInfo.style.position = "absolute";
-userInfo.style.top = "200px";
-userInfo.style.padding = "50px";
-userInfo.style.margin = "0 auto";
-userInfo.style.zIndex = "1000";
-userInfo.style.backgroundColor = "blue";
-userInfo.style.boxShadow = "2px 2px 2px rgba(0,0,0,0.5)";
+userInfo.style.cssText = `
+position: absolute;
+top: -50%;
+left: 50%;
+padding: 50px 0;
+width: 400px;
+text-align: center;
+transform: translate(-50%, -50%);
+z-index: 1000;
+background-color: darkorange;
+box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+border-radius: 10px;
+`;
+
+userInfo.innerHTML = `
+<p>Заполните форму</p>
+<input type='text' placeholder='Ваше имя'>
+<br />
+<input type='email' placeholder='Ваш e-mail'>
+<br />
+<input type='button' value='Сделать заказ'>
+`;
+
 document.body.appendChild(userInfo);
 
+userInfo.getElementsByTagName("p")[0].style.cssText = `
+padding: 15px 0 5px;
+color: snow;
+font-size: 22px;
+font-family: Verdana, sans-serif;
+margin-bottom: 10px;
+`;
 
-userInfo.innerHTML = `<input type='text' placeholder='Введите Ваше имя'>
-<br />
-<input type='email' placeholder='Введите Вашу почту'>
-<br />
-<input type='button' value='Сделать заказ'>`;
+const cssInput = `
+outline: none;
+padding: 7px;
+margin-bottom: 10px;
+font-size: 14px;
+font-family: Verdana, sans-serif;
+`;
 
-function makeOrder (e){
-e.preventDefault();
-wrapper.style.filter="blur(5px)";
-wrapper.style.transition="filter 500ms ease-in";
+const cssBtn = `
+padding: 7px;
+margin-bottom: 15px;
+font-size: 14px;
+font-family: Verdana, sans-serif;
+font-weight: 700;
+color: darkorange;
+`;
 
+userInfo.getElementsByTagName("input")[0].style.cssText = cssInput;
+userInfo.getElementsByTagName("input")[1].style.cssText = cssInput;
+userInfo.getElementsByTagName("input")[2].style.cssText = cssBtn;
 
-
+function makeOrder(e) {
+  e.preventDefault();
+  wrapper.style.pointerEvents = "none";
+  userInfo.style.top = "50%";
+  userInfo.style.transition = "top 500ms ease-out";
+  setTimeout(() => {
+    wrapper.style.filter = "blur(20px)";
+    wrapper.style.transition = "filter 300ms";
+  }, 500);
 }
