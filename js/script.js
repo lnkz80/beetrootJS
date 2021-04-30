@@ -33,11 +33,15 @@ const totalPrice = document.getElementById("totalPrice");
 const prodBox = document.getElementById("products");
 const catSel = document.getElementById("catSel");
 const priceSel = document.getElementById("priceSel");
+const sbmtOrderBtn = document.getElementById("sbmtOrder");
 
+//addListener on Order submit
+sbmtOrderBtn.addEventListener("click", makeOrder);
 //addListener on addItems buttons
 document.addEventListener("click", addItemToCart);
 //addListener on filter change
 document.addEventListener("change", changeFilterBtn);
+
 
 /* 
 =============> Фильтрация товара по выбранным категориям и цене
@@ -114,4 +118,35 @@ function addItemToCart(e) {
   const qty = parseInt(qtyObj.value);
   qtyObj.value = "";
   cart.update(qty, price);
+}
+
+/*
+=============> Потверждение заказа
+*/
+const wrapper = document.getElementById("app-container");
+
+const userInfo = document.createElement("div");
+userInfo.style.position = "absolute";
+userInfo.style.top = "200px";
+userInfo.style.padding = "50px";
+userInfo.style.margin = "0 auto";
+userInfo.style.zIndex = "1000";
+userInfo.style.backgroundColor = "blue";
+userInfo.style.boxShadow = "2px 2px 2px rgba(0,0,0,0.5)";
+document.body.appendChild(userInfo);
+
+
+userInfo.innerHTML = `<input type='text' placeholder='Введите Ваше имя'>
+<br />
+<input type='email' placeholder='Введите Вашу почту'>
+<br />
+<input type='button' value='Сделать заказ'>`;
+
+function makeOrder (e){
+e.preventDefault();
+wrapper.style.filter="blur(5px)";
+wrapper.style.transition="filter 500ms ease-in";
+
+
+
 }
