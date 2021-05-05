@@ -149,6 +149,12 @@ userInfo.innerHTML = `
 `;
 
 document.body.appendChild(userInfo);
+const usrName = userInfo.getElementsByTagName("input")[0];
+const usrEmail = userInfo.getElementsByTagName("input")[1];
+const confirmOrderBtn = userInfo.getElementsByTagName("input")[2];
+
+//addListener on Order confirm
+confirmOrderBtn.addEventListener("click", confirmOrder);
 
 userInfo.getElementsByTagName("p")[0].style.cssText = `
 padding: 15px 0 5px;
@@ -175,12 +181,16 @@ font-weight: 700;
 color: darkorange;
 `;
 
-userInfo.getElementsByTagName("input")[0].style.cssText = cssInput;
-userInfo.getElementsByTagName("input")[1].style.cssText = cssInput;
-userInfo.getElementsByTagName("input")[2].style.cssText = cssBtn;
+usrName.style.cssText = cssInput;
+usrEmail.style.cssText = cssInput;
+confirmOrderBtn.style.cssText = cssBtn;
 
 function makeOrder(e) {
   e.preventDefault();
+  if (totalItems.innerText === "XXX") {
+    alert("Вы не выбрали ни одного товара в корзину!");
+    return;
+  }
   wrapper.style.pointerEvents = "none";
   userInfo.style.top = "50%";
   userInfo.style.transition = "top 500ms ease-out";
@@ -188,4 +198,24 @@ function makeOrder(e) {
     wrapper.style.filter = "blur(20px)";
     wrapper.style.transition = "filter 300ms";
   }, 500);
+  // console.log();
+}
+
+//TODO: Не работает логика валидации полей - переделать!!!
+function chkForm(field) {
+  if (field.value.trim().match("^s*$")) {
+    alert("Заполните форму: Строки пустые.");
+    return false;
+  } else {
+    console.log(field.value);
+  }
+}
+
+function confirmOrder(e) {
+  e.preventDefault();
+  if (chkForm(usrName) || chkForm(usrEmail)) {
+    return;
+  } else {
+    alert("Ваш заказ принят, ожидайте выполнения :)");
+  }
 }
