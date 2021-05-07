@@ -125,9 +125,11 @@ function addItemToCart(e) {
 const wrapper = document.getElementById("app-container");
 
 const userInfo = document.createElement("div");
+
+//TODO change to top: -50%
 userInfo.style.cssText = `
 position: absolute;
-top: -50%;
+top: 50%;
 left: 50%;
 padding: 50px 0;
 width: 400px;
@@ -187,10 +189,10 @@ confirmOrderBtn.style.cssText = cssBtn;
 
 function makeOrder(e) {
   e.preventDefault();
-  if (totalItems.innerText === "XXX") {
-    alert("Вы не выбрали ни одного товара в корзину!");
-    return;
-  }
+  // if (totalItems.innerText === "XXX") {
+  //   alert("Вы не выбрали ни одного товара в корзину!");
+  //   return;
+  // }
   wrapper.style.pointerEvents = "none";
   userInfo.style.top = "50%";
   userInfo.style.transition = "top 500ms ease-out";
@@ -201,19 +203,23 @@ function makeOrder(e) {
   // console.log();
 }
 
-//TODO: Не работает логика валидации полей - переделать!!!
+//TODO: Переделать функцию валидации на более универсальную
+
 function chkForm(field) {
-  if (field.value.trim().match("^s*$")) {
-    alert("Заполните форму: Строки пустые.");
+  // empty str  match("^s*$")
+  //email check regexp: /^[^\s@,]+@[^\s@,]+\.[^\s@,]+$/
+  if (field.value.trim() == "") {
+    alert("Заполните все поля формы!");
     return false;
   } else {
-    console.log(field.value);
+    // console.log(field.value);
+    return true;
   }
 }
 
 function confirmOrder(e) {
   e.preventDefault();
-  if (chkForm(usrName) || chkForm(usrEmail)) {
+  if (!(chkForm(usrName) && chkForm(usrEmail))) {
     return;
   } else {
     alert("Ваш заказ принят, ожидайте выполнения :)");
