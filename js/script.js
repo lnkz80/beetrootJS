@@ -120,7 +120,7 @@ function addItemToCart(e) {
 }
 
 /*
-=============> Потверждение заказа
+=============> Подтверждение заказа
 */
 const wrapper = document.getElementById("app-container");
 
@@ -206,14 +206,20 @@ function makeOrder(e) {
 //TODO: Переделать функцию валидации на более универсальную
 
 function chkForm(field) {
+  const fld = field.value.trim();
   // empty str  match("^s*$")
   //email check regexp: /^[^\s@,]+@[^\s@,]+\.[^\s@,]+$/
-  if (field.value.trim() == "") {
+  if (fld == "") {
     alert("Заполните все поля формы!");
     return false;
   } else {
-    // console.log(field.value);
-    return true;
+    if (field.type == "email") {
+      // console.log(fld.match("/^[^s@,]+@[^s@,]+.[^s@,]+$/"));
+      console.log("========>email");
+      return true;
+    } else {
+      console.log(field.type);
+    }
   }
 }
 
